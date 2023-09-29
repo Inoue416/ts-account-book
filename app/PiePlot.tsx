@@ -1,3 +1,5 @@
+// TODO: ダミーデータから状態管理への移行, グラフサイズの調整, 
+
 "use client"
 import React from "react"
 import {Chart, ArcElement} from 'chart.js'

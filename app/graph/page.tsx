@@ -1,12 +1,12 @@
 "use client"
-import {PiePlot} from "./PiePlot"
+import {StackedBarPlot} from "./StackedBarPlot"
 
 
 
 export default function Home() {
   return (
     <div className={"graph-main"}>
-      <PiePlot />
+      <StackedBarPlot />
     </div>
   )
 }

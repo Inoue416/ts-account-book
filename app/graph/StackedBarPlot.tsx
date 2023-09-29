@@ -1,3 +1,5 @@
+// TODO: ダミーデータ部分を状態管理に移行する
+
 import React from 'react';
 import {
   Chart as ChartJS,
@@ -23,7 +25,7 @@ export const options = {
   plugins: {
     title: {
       display: true,
-      text: 'Chart.js Bar Chart - Stacked',
+      text: '2023 year',
     },
   },
   responsive: true,
@@ -43,18 +45,18 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: [100, 200, -150],
+      label: 'income',
+      data: [100, 200, 300],
       backgroundColor: 'rgb(255, 99, 132)',
     },
     {
-      label: 'Dataset 2',
-      data: [100, 200, -150],
+      label: 'Item 1',
+      data: [-1000, -80, -50],
       backgroundColor: 'rgb(75, 192, 192)',
     },
     {
-      label: 'Dataset 3',
-      data: [100, 200, -150],
+      label: 'Item 2',
+      data: [-200, -20, -1050],
       backgroundColor: 'rgb(53, 162, 235)',
     },
   ],

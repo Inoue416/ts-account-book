@@ -12,5 +12,10 @@ CORS(app)
 def hello():
     return "Hello from Flask!"
 
+@app.route("/add_info")
+def add_info(data):
+    print(data)
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
