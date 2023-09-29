@@ -2,10 +2,13 @@
 # 主にデータ管理
 
 from flask import Flask
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/sample')
+@app.route('/send_sample_message')
 def hello():
     return "Hello from Flask!"
 
