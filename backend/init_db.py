@@ -11,7 +11,9 @@ cur = get_cursor(conn)
 # テーブルの初期化
 cmd = """
     CREATE TABLE IF NOT EXISTS posts (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, money INTERGET NOT NULL,
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        money INTERGET NOT NULL,
+        thing TEXT NOT NULL,
         kind TEXT NOT NULL,
         created_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
         updated_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
@@ -22,14 +24,14 @@ cur.execute(cmd)
 conn.commit()
 
 # ダミーデータの挿入
-income_data = ["給料", 100000, "2023-04-20 09:00:00", "2023-04-20 09:00:00"]
+income_data = ["月収", "給料", 100000, "2023-04-20 09:00:00", "2023-04-20 09:00:00"]
 output_data = [
-    ["食費", -1000, "2023-04-01 12:00:00", "2023-04-01 12:00:00"],
-    ["娯楽費", -10000, "2023-05-15 10:00:00", "2023-05-15 10:00:00"]
+    ["セブンのアイス", "食費", -1000, "2023-04-01 12:00:00", "2023-04-01 12:00:00"],
+    ["旅行先のアトラクション", "娯楽費", -10000, "2023-05-15 10:00:00", "2023-05-15 10:00:00"]
 ]
 # 収入データ
 cmd = """
-    INSERT INTO posts (kind, money, created_at, updated_at) VALUES(?, ?, ?, ?)
+    INSERT INTO posts (thing, kind, money, created_at, updated_at) VALUES(?, ?, ?, ?, ?)
 """
 cur.execute(cmd, income_data)
 conn.commit()
