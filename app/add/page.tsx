@@ -2,9 +2,11 @@
 "use client"
 import {useState, useEffect} from "react"
 import axios from "axios"
+import { useRouter } from 'next/navigation';
 
 
 export default function AddPage() {
+    const router = useRouter()
     const [thing, setThing] = useState("")
     const [money, setMoney] = useState("")
     const [kind, setKind] = useState("")
@@ -38,10 +40,12 @@ export default function AddPage() {
         "kind": kind
       }).then((response) => {
         console.log(response)
+        router.push("/")
       }).catch((err) => {
         console.log(err)
       })
     }
+    // TODO: エラーメッセージの表示処理を追加したい
     return (
       <div className="add-main py-3 px-3">
         <div className="form-area">
