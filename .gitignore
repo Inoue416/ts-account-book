@@ -39,3 +39,5 @@ next-env.d.ts
 # Python(Serverサイド)
 venv/
 __pycache__
+
+data.db

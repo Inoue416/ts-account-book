@@ -21,7 +21,7 @@ export default function Home() {
 
       <div className="mt-5 text-9xl">
         <p>{message}</p>
-      </div>  
+      </div> 
     </div>
   )
 }
