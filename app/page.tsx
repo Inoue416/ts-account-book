@@ -1,6 +1,7 @@
 "use client"
 import {PiePlot} from "./PiePlot"
 import { useState, useEffect } from 'react'
+import axios from "axios"
 
 
 const mainClass = {}

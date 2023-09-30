@@ -7,12 +7,12 @@ Chart.register(ArcElement);
 import {Pie} from "react-chartjs-2"
 
 const sample_data = {
-    labels: ["Windos", "Mac", "Linux"],
+    labels: ["Income", "Payment"],
     datasets: [
         {
-            data: [50, 30, 20],
-            backgroundColor: ["#4169e1","#ff1493","#FFCE56"],
-            hoverBackgroundColor:  ["#36A2EB","#FF6384","#FFCE56"],
+            data: [0, 10000],
+            backgroundColor: ["#75feff","#fa6c5c"],
+            hoverBackgroundColor:  ["#a8feff","#fcaaa1"],
             borderColor: ["transparent","transparent","transparent"]
         }
     ]
@@ -20,7 +20,7 @@ const sample_data = {
 
 export const PiePlot: React.FC = () => {
     return (
-        <div>
+        <div className="pie-area my-5 container mx-auto">
             <Pie data={sample_data} />
         </div>
     )
