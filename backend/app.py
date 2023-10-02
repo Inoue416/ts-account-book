@@ -1,7 +1,7 @@
 # バックエンド
 # 主にデータ管理
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 from database import *
@@ -9,6 +9,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 CORS(app)
 
 DBNAME = "data.db" # 本来はだめ
@@ -72,6 +73,52 @@ def add_info():
     except:
         res_mess = "error"
     return {"response_message": res_mess}
+
+
+def get_now_year_data():
+    conn = create_connect(DBNAME)
+    cur = get_cursor(conn)
+    now_year = datetime.now().strftime('%Y')
+    cmd = """
+        SELECT * FROM posts WHERE strftime("%Y", updated_at) = ?;
+    """
+    year_data = cur.execute(cmd, [now_year,]).fetchall()
+    print(year_data)
+    return year_data
+
+
+@app.route('/get_year_data', methods=['GET'])
+def get_year_data():
+    res_mess = "error"
+    year_data = None
+    name2number = {
+        1: "January",   
+        2: "February",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "August",
+        9: "September",
+        10: "October",
+        11: "November",
+        12: "December",
+    } 
+
+    each_year_data = {}
+
+    try:
+        year_data = get_now_year_data()
+        res_mess = 'success'
+        for y_d in year_data:
+            month = int(y_d[4].split("-")[1])
+            if not(name2number[month] in each_year_data.keys()):
+                each_year_data[name2number[month]] = []
+            each_year_data[name2number[month]].append(y_d)
+    except:
+        pass
+    return jsonify({"response_message": res_mess, "data": each_year_data})
 
 
 if __name__ == '__main__':
