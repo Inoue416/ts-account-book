@@ -52,10 +52,11 @@ def hello():
 @app.route('/get_month_data', methods=["GET"])
 def get_month_data():
     res = "error"
+    month_data = None
     if request.method == "GET":
-        request_month_data()
+        month_data = request_month_data()
         res = "success"
-    return {"response_message": res}
+    return {"response_message": res, 'month_data': month_data}
 
 @app.route("/add_info", methods=["POST"])
 def add_info():
