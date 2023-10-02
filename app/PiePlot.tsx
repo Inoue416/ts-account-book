@@ -32,6 +32,7 @@ export const PiePlot: React.FC = () => {
     const [month_income_total, setMonthIncomeTotal] = useState(0)
     const [month_payment_total, setMonthPaymentTotal] = useState(0)
     const [month_total, setMonthTotal] = useState(0)
+    const [target_month_data, setTargetMonthData] = useState("")
     useEffect(() => {
         axios.get(
             'http://127.0.0.1:5000/get_month_data'
@@ -39,8 +40,15 @@ export const PiePlot: React.FC = () => {
             let month_payment_data: number = 0
             let month_income_data: number = 0
             let month_i_total: number = 0
+            let target_month: string = ""
             const month_data = response.data.month_data
             month_data.forEach((value, index, arr) => {
+                if (target_month === ""){
+                    
+                    let year_month: Array = value[4].split('-', 2)
+                    console.log(year_month)
+                    target_month = year_month[1] + ' Month'
+                }
                 if (value[1] > 0) {
                     month_income_data += value[1]
                     month_i_total += value[1]
@@ -50,6 +58,7 @@ export const PiePlot: React.FC = () => {
                 }
                 month_payment_data *= -1
             })
+            console.log(target_month)
             const pie_d = {
                 labels: ["Income", "Payment"],
                 datasets: [
@@ -66,6 +75,7 @@ export const PiePlot: React.FC = () => {
             setMonthIncomeTotal(month_i_total)
             setMonthPaymentTotal(month_payment_data)
             setMonthTotal(month_i_total-month_payment_data)
+            setTargetMonthData(target_month)
         }).catch((error) => {
             console.log(error)
         })
@@ -73,6 +83,7 @@ export const PiePlot: React.FC = () => {
 
     return (
         <div className="all-pie-area">
+            <div className="target-month-area container mx-auto text-center text-xl font-semibold mt-3 underline">{target_month_data}</div>
             <div className="pie-area my-5 container mx-auto">
                 <Pie data={pie_data} />
             </div>
